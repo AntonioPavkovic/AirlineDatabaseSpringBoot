@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/master-page}">
+<body>
+<th:block layout:fragment="content">
+    <div class="row">
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 10px">
+                <h1 style="color: #00008b">Search for a flight</h1>
+            </div>
+        </div>
+    </div>
+
+    <form action="/flight/search" method="post">
+        <div class="row">
+
+            <div class="form-group col-md-4">
+                <label class="col-form-label" for="departureAirport">Form</label>
+                <select class="form-control" id="departureAirport" name="departureAirport">
+                    <option th:each="airport, i:${airports}" th:text="$airport.airport.name"
+                            th:value="${airport.airportId}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label class="col-form-label" for="destinationAirport">To</label>
+                <span th:if="${AirportError!=null}" th:text="${AirportError}"
+                      class="badge badge-danger"></span>
+                <select class="form-control" id="destinationAirport" name="destinationAirport">
+                    <option th:each="airport, i:${airports}" th:text="$airport.airportName"
+                            th:value="airport.airportId"></option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label class="col-form-label" for="departureTime">Departure Time</label>
+                <input type="date" class="form-control" placeholder="" id="departureTime"
+                       name="departureTime" required>
+            </div>
+
+            <div class="form-group col-md-12">
+                <button type="submit" class="btn btn-success" style="float: right">Search</button>
+            </div>
+
+        </div>
+    </form>
+</th:block>
+
+<div class="row">
+    <th:block th:if="${notFound != null}"></th:block>
+</div>
+
+</body>
+</html>

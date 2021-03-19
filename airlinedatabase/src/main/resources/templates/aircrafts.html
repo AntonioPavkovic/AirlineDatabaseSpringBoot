@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/master-page}">
+<head lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/master-page}">
+    <meta charset="UTF-8">
+    <title>Customers</title>
+</head>
+<body>
+    <th:block layout:fragment="content">
+        <div th:class="row" th:style="margin-bottom: 10px">
+            <div th:class="col-md-6">
+                <h1 th:style="color: #00008b">Aircraft List</h1>
+            </div>
+            <div th:class="col-md-6">
+                <a th:href="/aircraft/new">
+                    <button th:type="button" th:class="btn btn-outline-primary" th:style="float: right">
+                        Add Aircraft
+                    </button>
+                </a>
+            </div>
+            <table th:class="table table-hover">
+                <thead>
+                <tr th:class="table-active">
+                    <th th:scope="col">ID</th>
+                    <th th:scope="col">Manufacturer</th>
+                    <th th:scope="col">Model</th>
+                    <th th:scope="col">Number of seats</th>
+                    <th th:scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <div th:each="aircraft, iterStat:${aircrafts}">
+                    <tr th:style="background-color: #fdfdfd">
+                        <th th:scope="row" th:text="${aircraft.aircraftId}">Dark</th>
+                        <td th:text="${aircraft.manufacturer}"></td>
+                        <td th:text="${aircraft.model}"></td>
+                        <td th:text="${aircraft.numberOfSeats}"></td>
+                        <td><a th:href="@{/aircraft/delete(aircraftId=${aircraft.aircraftId})}">
+                            <button th:type="button" th:class="btn btn-outline-danger btn-sm" th:onclick="alert('Are you sure you want to delete')">Delete</button>
+                        </a></td>
+                    </tr>
+                </div>
+                </tbody>
+            </table>
+            <div>
+                <ul th:class="pagination">
+                    <li th:class="page-item disabled">
+                        <a th:class="page-link" th:href="#">Pages:</a>
+                    </li>
+                    <th:block th:each="i:${#numbers.sequence(1,aircraft.totalPages)}">
+                        <li th:class="${currentPage}==(${i-1}) ? 'page-item active' : 'page-item'">
+                            <a th:class="pae-link" th:href="@{/aircraft(pageNo=(${i-1}))}" th:text="${i}}"></a>
+                        </li>
+                    </th:block>
+                </ul>
+            </div>
+        </div>
+    </th:block>
+</body>
+</html>

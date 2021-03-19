@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/master-page}">
+<head lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/master-page}">
+<meta charset="UTF-8">
+<title>Customers</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+
+    <div th:class="row" th:style="margin-bottom: 10px">
+        <div th:class="col-md-6">
+            <h1 th:style="color: #00008b">Airport List</h1>
+        </div>
+        <div th:class="col-md-6">
+            <a th:href="/airport/new">
+                <button th:type="button" th:class="btn btn-outline-primary" th:style="float: right">Add Airport</button>
+            </a>
+        </div>
+    </div>
+
+    <div th:class="table table-hover">
+        <thead>
+        <tr th:class="table-active">
+            <th th:scope="col">ID</th>
+            <th th:scope="col">Airport Code</th>
+            <th th:scope="col">Airport Name</th>
+            <th th:scope="col">City</th>
+            <th th:scope="col">State</th>
+            <th th:scope="col">Country</th>
+            <th th:scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <div th:each="airport,iterStart:${airports}">
+            <tr th:style="background-color: #fdfdfd">
+                <th th:scope="row" th:text="${airport.airportId}">Dark</th>
+                <td th:text="${airport.airportCode}"></td>
+                <td th:text="${airport.airportName}"></td>
+                <td th:text="${airport.city}"></td>
+                <td th:text="${airport.state}"></td>
+                <td th:text="${airport.country}"></td>
+                <td>
+                    <a th:href="@{/airport/delete(airportId=${airport.airportId})}">
+                        <button th:type="button" th:class="btn btn-outline-danger btn-sm" th:onclick="alert('are you sure you want to delete')">
+                            Delete
+                        </button>
+                    </a>
+                </td>
+            </tr>
+        </div>
+        </tbody>
+
+        <div>
+            <ul th:class="pagination">
+                <li th:class="page-item disabled">
+                    <a th:class="page-link" th:href="#">Pages:</a>
+                </li>
+                <th:block th:each="i:${#numbers.sequence(1, airports.totalPages)}">
+                    <li th:class="${currentPage}==(${i-1}) ? 'page-item active' : 'page-item'">
+                        <a class="page-link" th:href="@{/airports(pageNo=(${i-1}))}" th:text="${i}"></a>
+                    </li>
+                </th:block>
+            </ul>
+        </div>
+
+    </div>
+
+</th:block>
+</body>
+</html>
