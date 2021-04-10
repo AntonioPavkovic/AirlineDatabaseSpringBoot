@@ -11,8 +11,4 @@ public class AirlinedatabaseApplication {
 		SpringApplication.run(AirlinedatabaseApplication.class, args);
 	}
 
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder){
-		return builder.sources(AirlinedatabaseApplication.class);
-	}
-
 }

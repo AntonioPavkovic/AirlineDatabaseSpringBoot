@@ -2,36 +2,30 @@ package com.airlinedatabase.airlinedatabase.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.math.BigInteger;
 
 @Entity
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Passanger {
+public class Passenger {
 
     @Id
     @GeneratedValue
-    private long passangerId;
-
+    private long passengerId;
     @NotBlank
     private String firstName;
     @NotBlank
     private String lastName;
     @NotBlank
-    private String phoneNumber;
+    private BigInteger phoneNumber;
     @NotBlank
     private String passportNumber;
     private String email;
     private String address;
-
-    @ManyToOne
-    private Flight flight;
+    private Double luggage;
 
 }

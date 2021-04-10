@@ -11,7 +11,6 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
@@ -19,12 +18,15 @@ public class Airport {
 
     @Id
     @GeneratedValue
-    private int airportId;
-    private String airportCode;
+    private String airportId;
     private String airportName;
-    private String city;
-    private String country;
-
+    private String airportLocation;
     @OneToMany(mappedBy = "departureAirport")
     List<Flight> flights = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Airport{" + "airportName='" + airportName + '\'' + ", airportLocation='" + airportLocation + '\''
+                + ", airportId='" + airportId + '\'' + '}';
+    }
 }
