@@ -9,8 +9,8 @@ services:
       - 48708:3306
     environment:
       MYSQL_ROOT_PASSWORD: test
-    #    volumes:
-    #      - ./db/blueprint.sql:/docker-entrypoint-initdb.d/blueprint.sql
+    volumes:
+      - ./db_data/blueprint.sql:/docker-entrypoint-initdb.d/blueprint.sql
     networks:
       - am-test-mysql
   am-test-phpmyadmin:
