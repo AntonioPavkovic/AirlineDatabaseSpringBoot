@@ -1,9 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.0.4
--- https://www.phpmyadmin.net/
---
--- Host: am-test-mysql
--- Generation Time: Apr 11, 2021 at 02:03 PM
 -- Server version: 5.7.30
 -- PHP Version: 7.4.13
 
@@ -14,6 +8,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `anteairlines`
 --
+CREATE DATABASE IF NOT EXISTS `anteairlines` DEFAULT CHARACTER SET utf16 COLLATE utf16_general_ci;
+USE `anteairlines`;
 
 -- --------------------------------------------------------
 
